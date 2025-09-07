@@ -7,6 +7,17 @@ load_dotenv()
 
 
 @tool
+def search(query: str) -> str:
+    """
+    param query: a search query
+    returns: the top search result
+    """
+    search_tool = TavilySearch(max_results=1)
+    results = search_tool.run(query)
+    return results
+
+
+@tool
 def triple(num: float) -> float:
     """
     param num: a number to triple
@@ -15,7 +26,7 @@ def triple(num: float) -> float:
     return float(num) * 3
 
 
-tools = [TavilySearch(max_results=1), triple]
+tools = [search, triple]
 
 llm = ChatGroq(
     model="meta-llama/llama-4-scout-17b-16e-instruct", temperature=0
